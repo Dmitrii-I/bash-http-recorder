@@ -10,8 +10,8 @@ while true; do
         datetime=$(date +"%Y-%m-%d_%Hh%Mm%Ss")
         data_file="${datetime}_${app_name}_${machine_id}.tsv"
         
-        local i=1
-        while i <= $max_lines; do
+        i=1
+        while [ $i -le $max_lines ]; do
 
                 # Construct the message, written on a single line.
                 # Message consists of meta data and the http response data
@@ -25,5 +25,16 @@ while true; do
                 sleep $delay
                 i=$((i+1))
         done
+
+        # if remove duplicates is TRUE
+        if [ "$delete_duplicates" = "TRUE" ]; then
+                echo "going to delete dups" >> error.log
+        fi
+
+        # if remove duplicates is TRUE
+        if [ "$gzip" = "TRUE" ]; then
+                echo "going to delete gzip" >> error.log
+        fi
+
 done
 ) & # the parentheses and & are needed so that script runs as daemon under PPID 1
