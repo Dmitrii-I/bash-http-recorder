@@ -3,7 +3,11 @@
 # load the settings
 # Arguments: relative path of the configuration file
 
-# if no config filename provided as argument, take the default
+if [ $# -eq 0 ]; then
+    echo "No arguments (config file path) provided"
+    exit 1
+fi
+
 source $1 # the config file
 
 (
