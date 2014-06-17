@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # load the settings
+# Arguments: relative path of the configuration file
 
 # if no config filename provided as argument, take the default
-config=${1:-"bash-http-recorder.conf"}
-source $config
+source $1 # the config file
 
 (
 while true; do
@@ -23,7 +23,7 @@ while true; do
                 
                 # $s is the field separator defined in the config file
                 message="$timestamp$s$data$s$script_version$s$machine_id$s\
-                        $session_id$s$url\n"
+                        $session_start$s$url\n"
 
                 echo -ne $message >> $data_file
                 sleep $delay
